@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 
+import uvicorn
+
+import os
+
 from repository.firebase.Firebase import Firebase
 
 from controller import HttpController
@@ -23,4 +27,9 @@ app.add_middleware(
 )
 
 app.include_router(HttpController.router)
+
+if __name__ == "__main__":
+
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app:app", host="0.0.0.0", port=port)
 
